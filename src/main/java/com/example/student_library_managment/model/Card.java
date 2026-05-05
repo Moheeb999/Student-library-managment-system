@@ -1,6 +1,7 @@
 package com.example.student_library_managment.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
@@ -33,6 +34,7 @@ public class Card {
     @UpdateTimestamp
     private Date updateddate;
 
+    @JsonBackReference
     @JoinColumn // it joins the primary key student id from student table as a foreign key in card table
     @OneToOne // one card will be assigned to one student
     private Student student;

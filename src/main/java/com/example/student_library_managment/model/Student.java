@@ -1,6 +1,8 @@
 package com.example.student_library_managment.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Generated;
@@ -40,6 +42,7 @@ public class Student {
     @Column(name="dob",nullable = false)
     private String dob;
 
+    @JsonManagedReference
     @OneToOne(mappedBy = "student" ,cascade = CascadeType.ALL) // one card will be assigned to one student
     private Card card;
 }
