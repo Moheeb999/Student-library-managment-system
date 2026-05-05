@@ -23,8 +23,15 @@ public class StudentController {
     }
 
     @GetMapping("/findById/{id}")
-    public Student findById(@PathVariable int id){
-        return studentService.findById(id);
+    public Object findById(@PathVariable int id){
+        try {
+           Student std = studentService.findById(id);
+           return std;
+        }
+        catch (Exception e){
+            System.out.println("Exception occured: "+e);
+            return "Exception occured: "+e.getMessage();
+        }
     }
 
     @GetMapping("/findAll")
@@ -54,5 +61,10 @@ public class StudentController {
         return studentService.findPage(pageNo,pageSize);
     }
 
+    //User defined query
+    @GetMapping("/getbymail")
+    public Student getbymail(@RequestParam String mail){
+        return studentService.getStudentbymail(mail);
+    }
 
 }

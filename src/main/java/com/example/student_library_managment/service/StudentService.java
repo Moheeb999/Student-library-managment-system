@@ -47,7 +47,11 @@ public class StudentService {
 
     public Student findById(int id){
         Optional<Student> studentOptional=studentRepository.findById(id);
-        return studentOptional.orElse(null);
+        if(studentOptional.isPresent()){
+            return studentOptional.get();
+        } else {
+            throw new RuntimeException("Student not found");
+        }
     }
 
     public List<Student> findall(){
@@ -97,4 +101,8 @@ public class StudentService {
         return studentRepository.findAll(PageRequest.of(pageNo,pageSize, Sort.by("name").ascending())).getContent();
     }
 
+    //User defined queries
+    public Student getStudentbymail(String email){
+        return studentRepository.getStudentByEmail(email);
+    }
 }
